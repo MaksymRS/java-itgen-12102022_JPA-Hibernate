@@ -23,6 +23,8 @@ public class FlatOperations {
         System.out.print("Enter flat price: ");
         long price = Long.parseLong(sc.nextLine());
 
+        emf = Persistence.createEntityManagerFactory("JPATest");
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             Flat c = new Flat(district, address, square, roomsQty, price);
