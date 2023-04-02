@@ -41,16 +41,17 @@ public class FlatOperations {
         long id = Long.parseLong(sId);
 
         Flat c = em.getReference(Flat.class, id);
-        if (c != null) {
-            em.getTransaction().begin();
-            try {
-                em.remove(c);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                em.getTransaction().rollback();
-            }
-        } else {
+        if (c == null) {
             System.out.println("Flat not found!");
+            return;
+        }
+
+        em.getTransaction().begin();
+        try {
+            em.remove(c);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
         }
     }
 
